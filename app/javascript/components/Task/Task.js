@@ -11,7 +11,7 @@ import useStyles from './useStyles';
 const Task = ({ task }) => {
   const styles = useStyles();
   return (
-    <Card key={uuidv4()} className={styles.root}>
+    <Card className={styles.root}>
       <CardHeader title={task.name} />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
