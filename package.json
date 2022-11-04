@@ -37,6 +37,7 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "@types/ramda": "^0.28.18",
     "webpack-dev-server": "^3"
   },
   "scripts": {
