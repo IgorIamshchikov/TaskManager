@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react';
 import KanbanBoard from '@asseinfo/react-kanban';
 import { propOr } from 'ramda';
 import '@asseinfo/react-kanban/dist/styles.css';
+import { Fab } from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
 
 import Task from '../Task';
 import TasksRepository from 'repositories/TasksRepository';
 import ColumnHeader from '../ColumnHeader';
+import useStyles from './useStyles';
+import AddPopup from '../AddPopup';
+import TaskForm from 'forms/TaskForm';
 
 const STATES = [
   { key: 'new_task', value: 'New' },
@@ -26,15 +31,21 @@ const initialBoard = {
   }))
 };
 
+const MODES = {
+    ADD: 'add',
+    NONE: 'none',
+  };
+
 const TaskBoard = () => {
   const [board, setBoard] = useState(initialBoard);
   const [boardCards, setBoardCards] = useState([]);
   useEffect(() => loadBoard(), []);
   useEffect(() => generateBoard(), [boardCards]);
+  const styles = useStyles();
 
   const loadColumn = (state, page, perPage) => {
     return TasksRepository.index({
-      q: { stateEq: state },
+      q: { stateEq: state, s: 'created_at DESC' },
       page,
       perPage,
     });
@@ -96,6 +107,25 @@ const TaskBoard = () => {
     STATES.map(({ key }) => loadColumnInitial(key));
   };
 
+  const [mode, setMode] = useState(MODES.NONE);
+
+  const handleOpenAddPopup = () => {
+    setMode(MODES.ADD);
+  };
+  
+  const handleClose = () => {
+    setMode(MODES.NONE);
+  };
+
+  const handleTaskCreate = (params) => {
+    const attributes = TaskForm.attributesToSubmit(params);
+
+    return TasksRepository.create(attributes).then(({ data: { task } }) => {
+      loadColumnInitial(task.state);
+      handleClose();
+    });
+  };
+
   return (
     <>
       <KanbanBoard 
@@ -105,6 +135,12 @@ const TaskBoard = () => {
       >
         {board}
       </KanbanBoard>;
+
+      {mode === MODES.ADD && <AddPopup onCreateCard={handleTaskCreate} onClose={handleClose} />}
+      
+      <Fab className={styles.addButton} color="primary" aria-label="add" onClick={handleOpenAddPopup}>
+        <AddIcon />
+      </Fab>
     </>
   );
 };

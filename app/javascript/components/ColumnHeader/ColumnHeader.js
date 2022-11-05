@@ -13,7 +13,7 @@ const ColumnHeader = ({ column, onLoadMore }) => {
     id,
     title,
     cards,
-    meta: { totalCount, currentPage, totl },
+    meta: { totalCount, currentPage },
   } = column;
 
   const count = cards.length;
