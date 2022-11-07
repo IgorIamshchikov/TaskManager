@@ -5,12 +5,12 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import EditIcon  from '@material-ui/icons/Edit';
+import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 
 import useStyles from './useStyles';
 
-const Task = ({ task, onClick }) => {
+function Task({ task, onClick }) {
   const styles = useStyles();
   const handleClick = () => onClick(task);
   const action = (
@@ -29,7 +29,7 @@ const Task = ({ task, onClick }) => {
       </CardContent>
     </Card>
   );
-};
+}
 
 Task.propTypes = {
   task: PropTypes.shape().isRequired,

@@ -7,16 +7,16 @@ const useStyles = makeStyles(() => ({
     justifyContent: 'center',
     outline: 0,
   },
-    
+
   root: {
     width: 465,
   },
 
-  actions: { 
+  actions: {
     display: 'flex',
     justifyContent: 'flex-end',
   },
-    
+
   form: {
     display: 'flex',
     flexDirection: 'column',

@@ -21,7 +21,7 @@ axios.defaults.headers.get = headers();
 axios.defaults.headers.post = headers();
 axios.defaults.headers.put = headers();
 axios.defaults.headers.delete = headers();
-axios.interceptors.response.use(null, error => {
+axios.interceptors.response.use(null, (error) => {
   if (error.response.status === 422) {
     const {
       response: { data: errors },
@@ -41,7 +41,7 @@ export default {
     return axios
       .get(url, {
         params: decamelize(params),
-        paramsSerializer: { serialize: (parameters) => qs.stringify(parameters, { encode: false })}
+        paramsSerializer: { serialize: (parameters) => qs.stringify(parameters, { encode: false }) },
       })
       .then(camelize);
   },
@@ -59,6 +59,6 @@ export default {
   },
 
   delete(url) {
-    return axios.delete(url).then(camelize)
+    return axios.delete(url).then(camelize);
   },
 };

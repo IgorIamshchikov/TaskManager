@@ -16,7 +16,7 @@ import Form from './components/Form/Form';
 
 import useStyles from './useStyles';
 
-const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate }) => {
+function EditPopup({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate }) {
   const [task, setTask] = useState(null);
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
@@ -34,7 +34,7 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
       setErrors(error || {});
 
       if (error instanceof Error) {
-        alert(`Update Failed! Error: ${error.message}`);
+        alert(`Update Failed! Error: ${error.message}`); // eslint-disable-line no-alert
       }
     });
   };
@@ -45,7 +45,7 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
     onCardDestroy(task).catch((error) => {
       setSaving(false);
 
-      alert(`Destrucion Failed! Error: ${error.message}`);
+      alert(`Destrucion Failed! Error: ${error.message}`); // eslint-disable-line no-alert
     });
   };
   const isLoading = isNil(task);
@@ -67,17 +67,11 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
               <CircularProgress />
             </div>
           ) : (
-              <Form errors={errors} onChange={setTask} task={task} />
-            )}
+            <Form errors={errors} onChange={setTask} task={task} />
+          )}
         </CardContent>
         <CardActions className={styles.actions}>
-          <Button
-            disabled={isLoading || isSaving}
-            onClick={handleCardUpdate}
-            size="small"
-            variant="contained"
-            color="primary"
-          >
+          <Button disabled={isLoading || isSaving} onClick={handleCardUpdate} size="small" variant="contained" color="primary">
             Update
           </Button>
           <Button
@@ -93,14 +87,14 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
       </Card>
     </Modal>
   );
-};
+}
 
 EditPopup.propTypes = {
-    cardId: PropTypes. number.isRequired,
-    onClose: PropTypes.func.isRequired,
-    onCardDestroy: PropTypes.func.isRequired,
-    onLoadCard: PropTypes.func.isRequired,
-    onCardUpdate: PropTypes.func.isRequired,
+  cardId: PropTypes.number.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onCardDestroy: PropTypes.func.isRequired,
+  onLoadCard: PropTypes.func.isRequired,
+  onCardUpdate: PropTypes.func.isRequired,
 };
 
 export default EditPopup;
