@@ -5,12 +5,12 @@ import '@asseinfo/react-kanban/dist/styles.css';
 import { Fab } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
-import Task from '../Task';
+import Task from 'components/Task';
 import TasksRepository from 'repositories/TasksRepository';
-import ColumnHeader from '../ColumnHeader';
-import AddPopup from '../AddPopup';
+import ColumnHeader from 'components/ColumnHeader';
+import AddPopup from 'components/AddPopup';
 import TaskForm from 'forms/TaskForm';
-import EditPopup from '../EditPopup/EditPopup';
+import EditPopup from 'components/EditPopup';
 
 import useStyles from './useStyles';
 
@@ -156,7 +156,7 @@ function TaskBoard() {
       >
         {board}
       </KanbanBoard>
-      ;{mode === MODES.ADD && <AddPopup onCreateCard={handleTaskCreate} onClose={handleClose} />}
+      {mode === MODES.ADD && <AddPopup onCreateCard={handleTaskCreate} onClose={handleClose} />}
       {mode === MODES.EDIT && (
         <EditPopup
           onLoadCard={loadTask}

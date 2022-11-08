@@ -12,7 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import Form from './components/Form/Form';
+import Form from './components/Form';
 
 import useStyles from './useStyles';
 
