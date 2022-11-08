@@ -20,6 +20,7 @@ function AddPopup({ onClose, onCreateCard }) {
   const [task, changeTask] = useState(TaskForm.defaultAttributes());
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
+  const handleChangeSelect = fieldName => user => onChange({ ...task, [fieldName]: user });
 
   const handleCreate = () => {
     setSaving(true);
@@ -66,6 +67,15 @@ function AddPopup({ onClose, onCreateCard }) {
               label="Description"
               required
               margin="dense"
+            />
+            <UserSelect
+              label="Assignee"
+              value={task.assignee}
+              onChange={handleChangeSelect('assignee')}
+              isDisable
+              isRequired
+              error={has('assignee', errors)}
+              helperText={errors.assignee}
             />
           </div>
         </CardContent>

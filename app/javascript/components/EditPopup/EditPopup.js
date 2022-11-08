@@ -48,6 +48,7 @@ function EditPopup({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
       alert(`Destrucion Failed! Error: ${error.message}`); // eslint-disable-line no-alert
     });
   };
+
   const isLoading = isNil(task);
 
   return (
