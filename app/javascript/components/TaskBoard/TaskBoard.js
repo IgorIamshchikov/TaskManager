@@ -140,7 +140,7 @@ function TaskBoard() {
   };
 
   const handleTaskDestroy = (task) =>
-    TasksRepository.destroy(tTaskPresenter.id(task)).then(() => {
+    TasksRepository.destroy(TaskPresenter.id(task)).then(() => {
       loadColumnInitial(TaskPresenter.state(task));
       handleClose();
     });
