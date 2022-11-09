@@ -8,9 +8,9 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
 
 import UsersRepository from 'repositories/UsersRepository';
+import UserPresenter from 'presenters/UserPresenter';
 
 import useStyles from './useStyles';
-import UserPresenter from '../../presenters/UserPresenter';
 
 function UserSelect({ error, label, isClearable, isDisabled, isRequired, onChange, value, helperText }) {
   const [isFocused, setFocus] = useState(false);
