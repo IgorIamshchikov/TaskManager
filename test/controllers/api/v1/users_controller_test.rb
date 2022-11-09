@@ -1,9 +1,8 @@
 require 'test_helper'
 
 class Api::V1::UsersControllerTest < ActionController::TestCase
-
   test 'should get show' do
-    user = create :user
+    user = create(:user)
     get :show, params: { id: user.id, format: :json }
     assert_response :success
   end
@@ -12,5 +11,4 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
     get :index, params: { format: :json }
     assert_response :success
   end
-
- end
+end
