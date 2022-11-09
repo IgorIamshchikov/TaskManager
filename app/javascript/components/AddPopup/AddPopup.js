@@ -13,6 +13,8 @@ import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 
 import TaskForm from 'forms/TaskForm';
+import UserSelect from 'components/UserSelect';
+import TaskPresenter from 'presenters/TaskPresenter';
 
 import useStyles from './useStyles';
 
@@ -20,6 +22,7 @@ function AddPopup({ onClose, onCreateCard }) {
   const [task, changeTask] = useState(TaskForm.defaultAttributes());
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
+  const handleChangeSelect = (fieldName) => (user) => onChange({ ...task, [fieldName]: user });
 
   const handleCreate = () => {
     setSaving(true);
@@ -53,7 +56,7 @@ function AddPopup({ onClose, onCreateCard }) {
               error={has('name', errors)}
               helperText={errors.name}
               onChange={handleChangeTextField('name')}
-              value={task.name}
+              value={TaskPresenter.name(task)}
               label="Name"
               required
               margin="dense"
@@ -62,10 +65,19 @@ function AddPopup({ onClose, onCreateCard }) {
               error={has('description', errors)}
               helperText={errors.description}
               onChange={handleChangeTextField('description')}
-              value={task.description}
+              value={TaskPresenter.description(task)}
               label="Description"
               required
               margin="dense"
+            />
+            <UserSelect
+              label="Assignee"
+              value={TaskPresenter.assignee(task)}
+              onChange={handleChangeSelect('assignee')}
+              isDisable
+              isRequired
+              error={has('assignee', errors)}
+              helperText={errors.assignee}
             />
           </div>
         </CardContent>
